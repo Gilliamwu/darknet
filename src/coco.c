@@ -350,8 +350,27 @@ void test_coco(char *cfgfile, char *weightfile, char *filename, float thresh)
         get_detection_boxes(l, 1, 1, thresh, probs, boxes, 0);
         if (nms) do_nms_sort_v2(boxes, probs, l.side*l.side*l.n, l.classes, nms);
         draw_detections(im, l.side*l.side*l.n, thresh, boxes, probs, coco_classes, alphabet, 80);
-        save_image(im, "prediction");
-        show_image(im, "predictions");
+
+
+        // TOBECHECK_BY_JINGLIAN
+        // remove the front path
+        int lll = strlen(input);
+        char* suffix = input + lll;
+        while (0<lll && input[--lll] != '/');
+        if (input[lll] == '/'){
+            suffix = input+lll+1;
+            input[lll] = '\0';
+        }
+        // remove extension
+        char *retstr;
+        char *lastdot;
+        strcpy (retstr, suffix);
+        lastdot = strrchr (retstr, '.');
+        if (lastdot != NULL)
+        *lastdot = '\0';
+
+        save_image(im, retstr);
+        show_image(im, retstr);
         free_image(im);
         free_image(sized);
 #ifdef OPENCV

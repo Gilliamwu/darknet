@@ -340,11 +340,11 @@ void draw_detections_v3(image im, detection *dets, int num, float thresh, char *
             if (top < 0) top = 0;
             if (bot > im.h - 1) bot = im.h - 1;
 
-            //int b_x_center = (left + right) / 2;
-            //int b_y_center = (top + bot) / 2;
-            //int b_width = right - left;
-            //int b_height = bot - top;
-            //sprintf(labelstr, "%d x %d - w: %d, h: %d", b_x_center, b_y_center, b_width, b_height);
+            int b_x_center = (left + right) / 2;
+            int b_y_center = (top + bot) / 2;
+            int b_width = right - left;
+            int b_height = bot - top;
+            printf(" >>>coordinate: %d %d %d %d <<<\n", b_x_center, b_y_center, b_width, b_height);
 
             draw_box_width(im, left, top, right, bot, width, red, green, blue);
             if (alphabet) {
